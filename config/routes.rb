@@ -17,7 +17,12 @@ root 'products#index'
         post :checkout
       end
     end
+    namespace :account do
+      resources :orders
+    end
     resources :cart_items
 
     resources :orders
+
+
 end
