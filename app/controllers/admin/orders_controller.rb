@@ -13,6 +13,7 @@ class Admin::OrdersController < ApplicationController
   def ship
     @order = Order.find(params[:id])
     @order.ship!
+    OrderMailer.notify_ship(@order).deliver!# 在出货后，系统寄出通知信
     redirect_to :back
   end
 
@@ -25,6 +26,7 @@ class Admin::OrdersController < ApplicationController
   def cancel
     @order = Order.find(params[:id])
     @order.cancel_order!
+    OrderMailer.notify_cancel(@order).deliver!#在出货/取消订单后，系统应该寄出通知信
     redirect_to :back
   end
 
